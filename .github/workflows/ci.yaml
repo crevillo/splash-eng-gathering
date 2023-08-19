@@ -10,8 +10,6 @@ jobs:
         working-directory: ./app
     steps:
       - uses: actions/checkout@v1
-      - name: Setup Symfony
-        run: .env.dev .env
       - name: Install Composer Dependencies
         run: composer install --prefer-dist
       - name: Run Tests
