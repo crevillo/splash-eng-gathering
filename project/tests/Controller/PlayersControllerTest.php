@@ -230,19 +230,24 @@ class PlayersControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $container = self::$container;
-        $teamsRepository = $container->get(TeamsRepository::class);
-        $teamsRepository->save(new Team( 'Lakers'));
-        $team = $teamsRepository->find(1);
+        $team = new Team('Lakers');
 
         $em = $container->get(EntityManagerInterface::class);
 
-        $player1 = new Player('player 1', 35, 200, $team);
-        $player2 = new Player('player 2', 35, 200, $team);
-        $player3 = new Player('player 3', 35, 200, $team);
-        $player4 = new Player('player 4', 35, 200, $team);
-        $player5 = new Player('player 5', 35, 200, $team);
-        $player6 = new Player('player 6', 35, 200, $team);
+        $player1 = new Player('player 1', 35, 200);
+        $team->addPlayer($player1);
+        $player2 = new Player('player 2', 35, 200);
+        $team->addPlayer($player2);
+        $player3 = new Player('player 3', 35, 200);
+        $team->addPlayer($player3);
+        $player4 = new Player('player 4', 35, 200);
+        $team->addPlayer($player4);
+        $player5 = new Player('player 5', 35, 200);
+        $team->addPlayer($player5);
+        $player6 = new Player('player 6', 35, 200);
+        $team->addPlayer($player6);
 
+        $em->persist($team);
         $em->persist($player1);
         $em->persist($player2);
         $em->persist($player3);
@@ -277,14 +282,19 @@ class PlayersControllerTest extends WebTestCase
         $container = self::$container;
         $team = new Team('Lakers');
         $em = $container->get(EntityManagerInterface::class);
+
+        $player1 = new Player('player 1', 35, 200);
+        $team->addPlayer($player1);
+        $player2 = new Player('player 2', 35, 200);
+        $team->addPlayer($player2);
+        $player3 = new Player('player 3', 35, 200);
+        $team->addPlayer($player3);
+        $player4 = new Player('player 4', 35, 200);
+        $team->addPlayer($player4);
+        $player5 = new Player('player 5', 35, 200);
+        $team->addPlayer($player5);
+
         $em->persist($team);
-
-        $player1 = new Player('player 1', 35, 200, $team);
-        $player2 = new Player('player 2', 35, 200, $team);
-        $player3 = new Player('player 3', 35, 200, $team);
-        $player4 = new Player('player 4', 35, 200, $team);
-        $player5 = new Player('player 5', 35, 200, $team);
-
         $em->persist($player1);
         $em->persist($player2);
         $em->persist($player3);

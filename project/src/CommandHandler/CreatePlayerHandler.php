@@ -37,10 +37,10 @@ class CreatePlayerHandler
             }
 
             $createPlayerCommand->player->setTeam($team);
+            $createPlayerCommand->player->getTeam()->addPlayer($createPlayerCommand->player);
         } else {
             $this->entityManager->persist($createPlayerCommand->player->getTeam());
         }
-
         $this->entityManager->persist($createPlayerCommand->player);
         $this->entityManager->flush();
 
