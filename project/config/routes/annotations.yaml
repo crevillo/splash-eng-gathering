@@ -1,5 +1,9 @@
-controllers:
-    resource: ../../src/Controller/
+teams:
+    resource: ../../src/Teams/Controller/
+    type: annotation
+
+players:
+    resource: ../../src/Players/Controller/
     type: annotation
 
 kernel:

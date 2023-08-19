@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Entity;
+namespace App\Players\Entity;
 
+use App\Teams\Entity\Team;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PlayersRepository")
+ * @ORM\Entity(repositoryClass="App\Players\Repository\PlayersRepository")
  * @ORM\Table("players")
  *
  * Someone with more than 50 years can`t earn more than 2M
@@ -35,7 +36,7 @@ class Player implements \JsonSerializable
     private int $salary;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="players")
+     * @ORM\ManyToOne(targetEntity="App\Teams\Entity\Team", inversedBy="players")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
      */
     private Team $team;

@@ -17,13 +17,13 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/Entity/'
+            - '../src/*/Entity/'
             - '../src/Kernel.php'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller/'
+    App\Players\Controller\:
+        resource: '../src/Players/Controller/'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
@@ -35,11 +35,11 @@ services:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
     app.create_player_handler:
-        class: App\CommandHandler\CreatePlayerHandler
+        class: App\Players\Message\CommandHandler\CreatePlayerHandler
         tags:
-            - { name: tactician.handler, command: App\CommandAction\CreatePlayerCommand }
+            - { name: tactician.handler, command: App\Players\Message\Command\CreatePlayerCommand }
 
     app.create_team_hanler:
-        class: App\CommandHandler\CreateTeamHandler
+        class: App\Teams\Message\CommandHandler\CreateTeamHandler
         tags:
-            - { name: tactician.handler, command: App\CommandAction\CreateTeamCommand }
+            - { name: tactician.handler, command: App\Teams\Message\Command\CreateTeamCommand }

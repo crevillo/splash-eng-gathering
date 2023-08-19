@@ -1,9 +1,9 @@
 <?php
 
-namespace App\CommandHandler;
+namespace App\Teams\Message\CommandHandler;
 
-use App\CommandAction\CreateTeamCommand;
-use App\Entity\Team;
+use App\Teams\Entity\Team;
+use App\Teams\Message\Command\CreateTeamCommand;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;

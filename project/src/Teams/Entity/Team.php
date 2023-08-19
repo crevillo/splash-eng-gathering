@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace App\Teams\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\PersistentCollection;
+use App\Players\Entity\Player;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TeamsRepository")
+ * @ORM\Entity(repositoryClass="App\Teams\Repository\TeamsRepository")
  * @ORM\Table("teams")
  */
 class Team implements \JsonSerializable

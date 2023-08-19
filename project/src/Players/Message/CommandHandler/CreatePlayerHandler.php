@@ -1,10 +1,10 @@
 <?php
 
-namespace App\CommandHandler;
+namespace App\Players\Message\CommandHandler;
 
-use App\CommandAction\CreatePlayerCommand;
-use App\Entity\Player;
-use App\Entity\Team;
+use App\Players\Entity\Player;
+use App\Players\Message\Command\CreatePlayerCommand;
+use App\Teams\Entity\Team;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
