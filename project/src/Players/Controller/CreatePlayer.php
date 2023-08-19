@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Players\Controller;
 
-use App\CommandAction\CreatePlayerCommand;
-use App\Entity\Player;
-use App\Entity\Team;
+use App\Players\Entity\Player;
+use App\Players\Message\Command\CreatePlayerCommand;
+use App\Teams\Entity\Team;
 use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PlayersController
+class CreatePlayer
 {
     public function __construct(
         private readonly CommandBus $bus
@@ -22,7 +22,7 @@ class PlayersController
     /**
      * @Route(name="create_player", path="/players", methods={"POST"})
      */
-    public function createPlayer(Request $request)
+    public function __invoke(Request $request)
     {
         $requestContent = $request->getContent();
 
@@ -60,15 +60,5 @@ class PlayersController
             'statusCode' => Response::HTTP_CREATED,
             'message' => json_encode($player)
         ], Response::HTTP_CREATED);
-    }
-
-    public function updatePlayer(Request $request)
-    {
-
-    }
-
-    public function removePlayer(Request $request)
-    {
-
     }
 }

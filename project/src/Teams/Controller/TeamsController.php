@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Teams\Controller;
 
-use App\CommandAction\CreateTeamCommand;
-use App\Entity\Player;
-use App\Entity\Team;
+use App\Players\Entity\Player;
+use App\Teams\Entity\Team;
+use App\Teams\Message\Command\CreateTeamCommand;
 use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

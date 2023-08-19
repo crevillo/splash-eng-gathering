@@ -1,8 +1,8 @@
 <?php
 
-namespace App\CommandAction;
+namespace App\Teams\Message\Command;
 
-use App\Entity\Team;
+use App\Teams\Entity\Team;
 
 class CreateTeamCommand
 {

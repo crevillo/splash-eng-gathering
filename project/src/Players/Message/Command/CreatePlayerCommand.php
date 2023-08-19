@@ -1,8 +1,8 @@
 <?php
 
-namespace App\CommandAction;
+namespace App\Players\Message\Command;
 
-use App\Entity\Player;
+use App\Players\Entity\Player;
 
 class CreatePlayerCommand
 {

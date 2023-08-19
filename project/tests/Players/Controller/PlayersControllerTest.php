@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Tests\Controller;
+namespace App\Players\Tests\Controller;
 
-use App\Entity\Player;
-use App\Entity\Team;
-use App\Repository\PlayersRepository;
-use App\Repository\TeamsRepository;
+use App\Players\Entity\Player;
+use App\Teams\Entity\Team;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpClient\NativeHttpClient;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 

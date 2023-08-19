@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace App\Teams\Repository;
 
-use App\Entity\Team;
+use App\Teams\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
