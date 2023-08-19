@@ -7,3 +7,5 @@ RUN apt update -y && apt install git zip unzip curl -y
 RUN docker-php-ext-install pdo pdo_mysql
 
 WORKDIR /app
+
+RUN composer install
