@@ -1,16 +1,12 @@
 name: CI
 
-on: [push]
-
+on: push
 jobs:
-  phpunit:
+  test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./project
     steps:
-      - uses: actions/checkout@v1
-      - name: Install Composer Dependencies
-        run: composer install --prefer-dist
-      - name: Run Tests
-        run: php bin/phpunit
+      - uses: actions/checkout@v2
+      - name: Build the stack
+        run: docker-compose up -d
+      - name: Test
+        run: docker run --network container:php -v
