@@ -9,4 +9,4 @@ jobs:
       - name: Build the stack
         run: docker-compose up -d
       - name: Test
-        run: docker run php ls
+        run: docker run php ls /app
