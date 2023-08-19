@@ -12,4 +12,5 @@ jobs:
       - run: cd project
       - uses: php-actions/composer@v6
       - run: echo "Composer dependencies have been installed"
+      - run: cd project
       - run: vendor/bin/phpunit
