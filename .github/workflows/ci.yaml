@@ -7,4 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the stack
-        run: ls
+        run: docker-compose up -d
+      - name: Test
+        run: docker-compose run php bash -c "cd project && php vendor/bin/phpunit"
