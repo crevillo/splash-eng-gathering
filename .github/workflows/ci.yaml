@@ -9,4 +9,4 @@ jobs:
       - name: Build the stack
         run: docker-compose up -d
       - name: Test
-        run: docker run --network container:php 'cd project && php vendor/bin/phpunit'
+        run: docker run --network container:php sh -c 'cd project && php vendor/bin/phpunit'
