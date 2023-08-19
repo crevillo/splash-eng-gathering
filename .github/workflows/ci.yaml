@@ -10,3 +10,5 @@ jobs:
         run: docker-compose up -d
       - name: Composer install
         run: docker-compose run php bash -c "cd project && composer install"
+      - name: Test
+        run: docker-compose run php bash -c "cd project && php vendor/bin/phpunit"
