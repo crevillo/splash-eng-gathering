@@ -3,14 +3,16 @@ name: CI
 on: [push]
 
 jobs:
-  build-test:
+  phpunit:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./app
     steps:
-      - uses: actions/checkout@v3
-      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
-      - uses: php-actions/composer@v6
-      - run: echo "Composer dependencies have been installed"
-      - name: Run tests
-        working-directory: project
-        run: vendor/bin/phpunit
+      - uses: actions/checkout@v1
+      - name: Setup Symfony
+        run: .env.dev .env
+      - name: Install Composer Dependencies
+        run: composer install --prefer-dist
+      - name: Run Tests
+        run: php bin/phpunit
