@@ -10,5 +10,5 @@ COPY project /app
 
 WORKDIR /app/project
 
-RUN composer install
+RUN ls
 
