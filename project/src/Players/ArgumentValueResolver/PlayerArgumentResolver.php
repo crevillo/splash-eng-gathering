@@ -7,12 +7,15 @@ use App\Players\Entity\Player;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PlayerArgumentResolver implements ArgumentValueResolverInterface
 {
     public function __construct(
-        private readonly SerializerInterface $serializer
+        private readonly SerializerInterface $serializer,
+        private readonly ValidatorInterface $validator
     ) {
     }
 
@@ -23,6 +26,13 @@ class PlayerArgumentResolver implements ArgumentValueResolverInterface
 
     public function resolve(Request $request, ArgumentMetadata $argument)
     {
-        yield $this->serializer->deserialize($request->getContent(), PlayerInput::class, 'json');
+        try {
+            $input = $this->serializer->deserialize($request->getContent(), PlayerInput::class, 'json');
+            $this->validator->validate($input);
+        } catch (\Exception $exception) {
+            throw new BadRequestHttpException();
+        }
+
+        yield $input;
     }
 }
