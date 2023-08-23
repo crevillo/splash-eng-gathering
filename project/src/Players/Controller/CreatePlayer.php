@@ -10,13 +10,18 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Messenger\HandleTrait;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CreatePlayer
 {
+    use HandleTrait;
+
     public function __construct(
-        private readonly CommandBus $bus
+        MessageBusInterface $commandBus
     ) {
+        $this->messageBus = $commandBus;
     }
 
     /**
@@ -55,7 +60,15 @@ class CreatePlayer
         $team = new Team($playerData['team']['name']);
         $player = new Player($playerData['name'], $playerData['age'], $playerData['salary'], $team);
 
-        $player = $this->bus->handle(new CreatePlayerCommand($player));
+        try {
+            $player = $this->handle(new CreatePlayerCommand($player));
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'statusCode' => Response::HTTP_BAD_REQUEST,
+                'message' => ['error' => $exception->getMessage()]
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
         return new JsonResponse([
             'statusCode' => Response::HTTP_CREATED,
             'message' => json_encode($player)

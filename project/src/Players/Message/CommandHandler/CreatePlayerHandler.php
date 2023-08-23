@@ -7,15 +7,16 @@ use App\Players\Message\Command\CreatePlayerCommand;
 use App\Teams\Entity\Team;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class CreatePlayerHandler
+class CreatePlayerHandler implements MessageHandlerInterface
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager
     ) {
     }
 
-    public function handle(CreatePlayerCommand $createPlayerCommand): Player
+    public function __invoke(CreatePlayerCommand $createPlayerCommand): Player
     {
         $teamsRepository = $this->entityManager->getRepository(Team::class);
         if ($team = $teamsRepository->findOneBy(['name' => $createPlayerCommand->player->getTeam()->getName()])) {

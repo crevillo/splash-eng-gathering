@@ -10,13 +10,17 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Messenger\HandleTrait;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TeamsController
 {
+    use HandleTrait;
     public function __construct(
-        private readonly CommandBus $bus
+        MessageBusInterface $bus
     ) {
+        $this->messageBus = $bus;
     }
 
     /**
@@ -61,7 +65,7 @@ class TeamsController
 
         $team = new Team($playerData['name'], $teamPlayers);
 
-        $team = $this->bus->handle(new CreateTeamCommand($team));
+        $team = $this->handle(new CreateTeamCommand($team));
 
         return new JsonResponse([
             'statusCode' => Response::HTTP_CREATED,

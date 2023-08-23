@@ -7,15 +7,16 @@ use App\Teams\Message\Command\CreateTeamCommand;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class CreateTeamHandler
+class CreateTeamHandler implements MessageHandlerInterface
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager
     ) {
     }
 
-    public function handle(CreateTeamCommand $createTeamCommand): Team
+    public function __invoke(CreateTeamCommand $createTeamCommand): Team
     {
         foreach ($createTeamCommand->team->getPlayers() as $player) {
             $this->entityManager->persist($player);

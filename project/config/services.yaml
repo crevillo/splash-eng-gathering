@@ -33,13 +33,3 @@ services:
         class: App\EventListener\AppExceptionListener
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
-
-    app.create_player_handler:
-        class: App\Players\Message\CommandHandler\CreatePlayerHandler
-        tags:
-            - { name: tactician.handler, command: App\Players\Message\Command\CreatePlayerCommand }
-
-    app.create_team_hanler:
-        class: App\Teams\Message\CommandHandler\CreateTeamHandler
-        tags:
-            - { name: tactician.handler, command: App\Teams\Message\Command\CreateTeamCommand }
