@@ -28,7 +28,7 @@ class PlayerArgumentResolver implements ArgumentValueResolverInterface
     {
         try {
             $input = $this->serializer->deserialize($request->getContent(), PlayerInput::class, 'json');
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             throw new BadRequestHttpException();
         }
 
